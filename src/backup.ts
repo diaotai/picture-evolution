@@ -245,13 +245,13 @@ interface NormalVariantParams {
 function variant(value: number, maxVariant: MaxVariantParams, midVariant: NormalVariantParams, minVariant: NormalVariantParams): number {
     let variantValue = value; 
     const { rangeStart, rangeEnd } = maxVariant;
-    if (utils.rand(maxVariant.rate)) {
+    if (utils.getBooleanByRand(maxVariant.rate)) {
         variantValue = utils.generateRandomInt(rangeStart, rangeEnd)
     }
-    else if (utils.rand(midVariant.rate)) {
+    else if (utils.getBooleanByRand(midVariant.rate)) {
         variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomInt(-midVariant.range, midVariant.range)));
     }
-    else if (utils.rand(minVariant.rate)) {
+    else if (utils.getBooleanByRand(minVariant.rate)) {
         variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomInt(-minVariant.range, minVariant.range)));
     }
     return variantValue;
