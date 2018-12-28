@@ -20,7 +20,7 @@ export class Triangle {
     }
 
     public variant() {
-        for (let point of this.points) {
+        for (const point of this.points) {
             point.variant();
         }
         this.color.variant();

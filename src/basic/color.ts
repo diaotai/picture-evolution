@@ -1,10 +1,9 @@
-import { generateRandomIntBetweenZeroAndN, variant, VariantParams } from '../utils/index';
+import { generateRandomIntBetweenZeroAndN, variant, IVariantParams } from '../utils/index';
 
 export class Color {
-    public rgb: ColorParams;
     public static opacity = 0.4;
     public static range = 256;
-    public static variantParams: VariantParams = {
+    public static IVariantParams: IVariantParams = {
         max: {
             rangeStart: 0,
             rangeEnd: Color.range,
@@ -13,14 +12,14 @@ export class Color {
         mid: {
             range: 10,
             rate: 0.003
-        }, 
+        },
         min: {
             range: 5,
             rate: 0.009
         }
-    }
-
-    public constructor(rgb?: ColorParams) {
+    };
+    public rgb: IColorParams;
+    public constructor(rgb?: IColorParams) {
         if (rgb) {
             this.rgb = {...rgb};
         } else {
@@ -35,23 +34,20 @@ export class Color {
 
     public variant() {
         const { r, g, b } = this.rgb;
-        this.rgb.r = variant(r, Color.variantParams);
-        this.rgb.g = variant(g, Color.variantParams);
-        this.rgb.b = variant(b, Color.variantParams);
+        this.rgb.r = variant(r, Color.IVariantParams);
+        this.rgb.g = variant(g, Color.IVariantParams);
+        this.rgb.b = variant(b, Color.IVariantParams);
     }
 
-    private generateDefaultColorRGB(): ColorParams {
+    private generateDefaultColorRGB(): IColorParams {
         return {
             r: generateRandomIntBetweenZeroAndN(Color.range),
             g: generateRandomIntBetweenZeroAndN(Color.range),
-            b: generateRandomIntBetweenZeroAndN(Color.range)
-        }
+            b: generateRandomIntBetweenZeroAndN(Color.range),
+        };
     }
 }
-
-
-
-export interface ColorParams {
+export interface IColorParams {
     r: number;
     g: number;
     b: number;

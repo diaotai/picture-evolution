@@ -1,10 +1,8 @@
-import { generateRandomIntBetweenZeroAndN, variant, getRangeValue ,VariantParams } from '../utils/index';
+import { generateRandomIntBetweenZeroAndN, variant, getRangeValue ,IVariantParams } from '../utils/index';
 
 export class Point {
-    public x: number;
-    public y: number;
     public static range = 256;
-    public static variantParams: VariantParams = {
+    public static IVariantParams: IVariantParams = {
         max: {
             rangeStart: 0,
             rangeEnd: 255,
@@ -13,13 +11,15 @@ export class Point {
         mid: {
             range: 10,
             rate: 0.003
-        }, 
+        },
         min: {
             range: 5,
             rate: 0.009
         }
-    }    
-    constructor (x?: number, y?: number) {
+    };
+    public x: number;
+    public y: number;
+    constructor(x?: number, y?: number) {
         if (x && y) {
             this.x = this.getRangValue(x);
             this.y = this.getRangValue(y);
@@ -30,8 +30,8 @@ export class Point {
     }
 
     public variant() {
-        this.x = variant(this.x, Point.variantParams);
-        this.y = variant(this.y, Point.variantParams);
+        this.x = variant(this.x, Point.IVariantParams);
+        this.y = variant(this.y, Point.IVariantParams);
     }
 
     private getRangValue(value: number) {
