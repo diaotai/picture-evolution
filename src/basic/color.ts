@@ -1,12 +1,13 @@
-import { generateRandomIntBetweenZero, variant, VariantParams } from '../utils/index';
+import { generateRandomIntBetweenZeroAndN, variant, VariantParams } from '../utils/index';
 
 export class Color {
     public rgb: ColorParams;
     public static opacity = 0.4;
+    public static range = 256;
     public static variantParams: VariantParams = {
         max: {
             rangeStart: 0,
-            rangeEnd: 255,
+            rangeEnd: Color.range,
             rate: 0.0008
         },
         mid: {
@@ -40,11 +41,10 @@ export class Color {
     }
 
     private generateDefaultColorRGB(): ColorParams {
-        const maxRgbRange = 255;
         return {
-            r: generateRandomIntBetweenZero(maxRgbRange),
-            g: generateRandomIntBetweenZero(maxRgbRange),
-            b: generateRandomIntBetweenZero(maxRgbRange)
+            r: generateRandomIntBetweenZeroAndN(Color.range),
+            g: generateRandomIntBetweenZeroAndN(Color.range),
+            b: generateRandomIntBetweenZeroAndN(Color.range)
         }
     }
 }

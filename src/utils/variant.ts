@@ -1,4 +1,4 @@
-import { rand, generateRandomInt, generateRandomIntRange } from './random';
+import { getBooleanByRand, generateRandomInt, generateRandomIntBetweenRange } from './random';
 
 interface MaxVariantParams {
     rangeStart: number;
@@ -21,14 +21,14 @@ export function variant(value: number, variantParams: VariantParams): number {
     let variantValue = value; 
     const { max, mid, min } = variantParams;
     const { rangeStart, rangeEnd } = max;
-    if (rand(max.rate)) {
+    if (getBooleanByRand(max.rate)) {
         variantValue = generateRandomInt(rangeStart, rangeEnd)
     }
-    else if (rand(mid.rate)) {
-        variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomIntRange(mid.range)));
+    else if (getBooleanByRand(mid.rate)) {
+        variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomIntBetweenRange(mid.range)));
     }
-    else if (rand(min.rate)) {
-        variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomIntRange(min.range)));
+    else if (getBooleanByRand(min.rate)) {
+        variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomIntBetweenRange(min.range)));
     }
     return variantValue;
 }

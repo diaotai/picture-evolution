@@ -79,8 +79,8 @@ Drawing.prototype.cloneAndMutateFromParent = function(parent){
 }
 
 Drawing.prototype.dirty = function(){
-    let dirtyOne = utils.generateRandomIntBetweenZero(this.triangleNum);
-    let dirtyP = utils.generateRandomIntBetweenZero(4);
+    let dirtyOne = utils.generateRandomIntBetweenZeroAndN(this.triangleNum);
+    let dirtyP = utils.generateRandomIntBetweenZeroAndN(4);
     if(dirtyP < 3){
         this.triangles[dirtyOne].points[dirtyP].x = Math.min(Math.max(0, this.triangles[dirtyOne].points[dirtyP].x + utils.generateRandomInt(-5, 5)), 255);
         this.triangles[dirtyOne].points[dirtyP].y = Math.min(Math.max(0, this.triangles[dirtyOne].points[dirtyP].y + utils.generateRandomInt(-5, 5)), 255);
