@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "lint": "tslint -c tslint.json --project ./",
     "dev": "webpack-dev-server --config webpack.config.js",
     "build": "webpack --config webpack.config.js"
   },
@@ -16,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ts-lint": "^4.5.1",
     "webpack": "^4.28.2"
   },
   "devDependencies": {
