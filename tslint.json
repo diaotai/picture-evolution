@@ -5,7 +5,11 @@
     ],
     "jsRules": {},
     "rules": {
-        "quotemark": false
+        "quotemark": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "trailing-comma": false,
+        "no-shadowed-variable": false
     },
     "rulesDirectory": []
 }
