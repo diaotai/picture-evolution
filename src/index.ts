@@ -74,7 +74,7 @@ Drawing.prototype.cloneAndMutateFromParent = function(parent) {
         this.triangles[i].variant();
     }
     this.dirty();
-}
+};
 
 Drawing.prototype.dirty = function() {
     const dirtyOne = utils.generateRandomIntBetweenZeroAndN(this.triangleNum);
@@ -97,7 +97,7 @@ Drawing.prototype.draw = function() {
     }
 };
 
-Drawing.prototype.calcRate = (targetData: any) => {
+Drawing.prototype.calcRate = function(targetData: any) {
     if (this.matchRate > 0) {
         console.log(this.matchRate);
         return this.matchRate;
@@ -116,7 +116,7 @@ Drawing.prototype.calcRate = (targetData: any) => {
     return this.matchRate;
 };
 
-Drawing.prototype.drawIt = (ctx: CanvasRenderingContext2D) => {
+Drawing.prototype.drawIt = function(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, 256, 256);
     ctx.globalAlpha = 0.35;
     for (const triangle of this.triangles) {
