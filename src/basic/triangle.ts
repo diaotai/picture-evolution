@@ -14,7 +14,7 @@ export class Triangle {
         } else {
             for (let i = 0; i < 3; i++) {
                 this.points[i] = new Point();
-            } 
+            }
             this.color = new Color();
         }
     }

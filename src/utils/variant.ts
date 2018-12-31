@@ -18,7 +18,7 @@ export interface IVariantParams {
 }
 
 export function variant(value: number, variantParams: IVariantParams): number {
-    let variantValue = value; 
+    let variantValue = value;
     const { max, mid, min } = variantParams;
     const { rangeStart, rangeEnd } = max;
     if (getBooleanByRand(max.rate)) {

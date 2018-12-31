@@ -4,7 +4,7 @@ import { getBooleanByRand, generateRandomIntBetweenRange,
 test('getBooleanByRand will be false when seed is not between 0 and 1', () => {
     expect(getBooleanByRand(-0.1)).toBeFalsy();
     expect(getBooleanByRand(1.1)).toBeFalsy();
-})
+});
 
 test('generateRandomIntBetweenRange will generate value in range', () => {
     const value = generateRandomIntBetweenRange(10);
@@ -13,7 +13,7 @@ test('generateRandomIntBetweenRange will generate value in range', () => {
     expect(value).toBe(Math.floor(value));
     expect(generateRandomIntBetweenRange(0)).toBe(0);
     expect(generateRandomIntBetweenRange(-1)).toBe(0);
-})
+});
 
 test('generateRandomIntBetweenZeroAndN', () => {
     const value = generateRandomIntBetweenZeroAndN(10);
@@ -22,7 +22,7 @@ test('generateRandomIntBetweenZeroAndN', () => {
     expect(value).toBe(Math.floor(value));
     expect(generateRandomIntBetweenZeroAndN(0)).toBe(0);
     expect(generateRandomIntBetweenZeroAndN(-3)).toBe(0);
-})
+});
 
 test('generateRandomInt should produce a number between start and end', () => {
     const value = generateRandomInt(-5, 10);
@@ -31,4 +31,4 @@ test('generateRandomInt should produce a number between start and end', () => {
     expect(value).toBe(Math.floor(value));
     expect(generateRandomInt(0, 0)).toBe(0);
     expect(generateRandomInt(10, -5)).toBe(0);
-})
+});

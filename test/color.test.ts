@@ -8,4 +8,4 @@ test('A Color without params rgb should in the expected range', () => {
     expect(color.rgb.g).toBeGreaterThanOrEqual(0);
     expect(color.rgb.b).toBeLessThan(Color.range);
     expect(color.rgb.b).toBeGreaterThanOrEqual(0);
-})
+});

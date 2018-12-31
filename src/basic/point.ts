@@ -1,4 +1,4 @@
-import { generateRandomIntBetweenZeroAndN, variant, getRangeValue ,IVariantParams } from '../utils/index';
+import { generateRandomIntBetweenZeroAndN, variant, getRangeValue , IVariantParams } from '../utils/index';
 
 export class Point {
     public static range = 256;
