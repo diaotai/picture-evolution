@@ -1,4 +1,5 @@
 # 通过遗传算法模拟图片
+![构建状态](https://travis-ci.org/diaotai/picture-evolution.svg?branch=master)
 ## 项目背景
 [遗传算法简介](http://songshuhui.net/archives/10462)
 
@@ -9,12 +10,14 @@
 
 ## v1 todo
 - 使用面向对象思想重构全部代码
+- 添加 ci 逻辑
 - 处理全部 lint error
 - 添加根据操作面板来调整参数逻辑
 - 使用 worker 来进行运算
 - 完善测试逻辑
 - 添加相似度记录逻辑
 - 升级相似度比较算法
+- 增加停止进化逻辑（当相似度长时间没有提升即认为已达到进化极限，此时停止进化）
 
 
 # v2 todo
