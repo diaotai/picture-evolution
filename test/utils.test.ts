@@ -11,6 +11,7 @@ test('generateRandomIntBetweenRange will generate value in range', () => {
     expect(value).toBeLessThan(10);
     expect(value).toBeGreaterThanOrEqual(-10);
     expect(value).toBe(Math.floor(value));
+
     expect(generateRandomIntBetweenRange(0)).toBe(0);
     expect(generateRandomIntBetweenRange(-1)).toBe(0);
 });
@@ -20,6 +21,7 @@ test('generateRandomIntBetweenZeroAndN', () => {
     expect(value).toBeLessThan(10);
     expect(value).toBeGreaterThanOrEqual(0);
     expect(value).toBe(Math.floor(value));
+
     expect(generateRandomIntBetweenZeroAndN(0)).toBe(0);
     expect(generateRandomIntBetweenZeroAndN(-3)).toBe(0);
 });
@@ -29,6 +31,7 @@ test('generateRandomInt should produce a number between start and end', () => {
     expect(value).toBeLessThan(10);
     expect(value).toBeGreaterThanOrEqual(-5);
     expect(value).toBe(Math.floor(value));
+
     expect(generateRandomInt(0, 0)).toBe(0);
     expect(generateRandomInt(10, -5)).toBe(0);
 });

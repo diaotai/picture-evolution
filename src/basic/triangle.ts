@@ -19,11 +19,11 @@ export class Triangle {
         }
     }
 
-    public variant() {
+    public mutate() {
         for (const point of this.points) {
-            point.variant();
+            point.mutate();
         }
-        this.color.variant();
+        this.color.mutate();
     }
 
     public draw(ctx: CanvasRenderingContext2D) {

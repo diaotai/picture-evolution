@@ -1,4 +1,4 @@
-import { generateRandomIntBetweenZeroAndN, variant, IVariantParams } from '../utils/index';
+import { generateRandomIntBetweenZeroAndN, mutate, IVariantParams } from '../utils/index';
 
 export class Color {
     public static opacity = 0.4;
@@ -19,6 +19,7 @@ export class Color {
         }
     };
     public rgb: IColorParams;
+
     public constructor(rgb?: IColorParams) {
         if (rgb) {
             this.rgb = {...rgb};
@@ -32,11 +33,11 @@ export class Color {
         return `rgb(${r},${g},${b})`;
     }
 
-    public variant() {
+    public mutate() {
         const { r, g, b } = this.rgb;
-        this.rgb.r = variant(r, Color.IVariantParams);
-        this.rgb.g = variant(g, Color.IVariantParams);
-        this.rgb.b = variant(b, Color.IVariantParams);
+        this.rgb.r = mutate(r, Color.IVariantParams);
+        this.rgb.g = mutate(g, Color.IVariantParams);
+        this.rgb.b = mutate(b, Color.IVariantParams);
     }
 
     private generateDefaultColorRGB(): IColorParams {

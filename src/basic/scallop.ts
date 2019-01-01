@@ -5,6 +5,7 @@ export class Scallop {
     public canvasContext: CanvasRenderingContext2D;
     public triangles: Triangle[] = [];
     public parent: Scallop;
+
     constructor(triangleCount: number, canvasContextx: CanvasRenderingContext2D, parent?: Scallop) {
         if (parent) {
             this.triangleCount = parent.triangleCount;
@@ -48,7 +49,7 @@ export class Scallop {
         for (let i = 0; i < this.triangleCount; i ++) {
             const parentTriangle = this.parent.triangles[i];
             const childTriangle = new Triangle(parentTriangle.points, parentTriangle.color);
-            childTriangle.variant();
+            childTriangle.mutate();
             this.triangles[i] = childTriangle;
         }
     }

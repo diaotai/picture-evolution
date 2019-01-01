@@ -1,23 +1,6 @@
 import { generateRandomInt, generateRandomIntBetweenRange, getBooleanByRand } from './random';
 
-interface IMaxVariantParams {
-    rangeStart: number;
-    rangeEnd: number;
-    rate: number;
-}
-
-interface INormalVariantParams {
-    rate: number;
-    range: number;
-}
-
-export interface IVariantParams {
-    max: IMaxVariantParams;
-    mid: INormalVariantParams;
-    min: INormalVariantParams;
-}
-
-export function variant(value: number, variantParams: IVariantParams): number {
+export function mutate(value: number, variantParams: IVariantParams): number {
     let variantValue = value;
     const { max, mid, min } = variantParams;
     const { rangeStart, rangeEnd } = max;
@@ -29,4 +12,21 @@ export function variant(value: number, variantParams: IVariantParams): number {
         variantValue = Math.min(rangeEnd, Math.max(rangeStart, value + generateRandomIntBetweenRange(min.range)));
     }
     return variantValue;
+}
+
+export interface IVariantParams {
+    max: IMaxVariantParams;
+    mid: INormalVariantParams;
+    min: INormalVariantParams;
+}
+
+interface IMaxVariantParams {
+    rangeStart: number;
+    rangeEnd: number;
+    rate: number;
+}
+
+interface INormalVariantParams {
+    rate: number;
+    range: number;
 }

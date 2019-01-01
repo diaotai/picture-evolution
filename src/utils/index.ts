@@ -1,3 +1,3 @@
 export * from './random';
-export * from './variant';
+export * from './mutate';
 export * from './range';
