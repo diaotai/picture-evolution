@@ -1,5 +1,11 @@
 import { Scallop } from './scallop';
 
+enum STATUS {
+    INIT,
+    RUN,
+    PAUSE
+}
+
 export class Evolution {
     private status = STATUS.RUN;
     private targetImageData: ImageData;
@@ -12,6 +18,19 @@ export class Evolution {
     constructor() {
         this.initEvolution();
         this.loop();
+    }
+
+    public handleStartButtonClick() {
+        this.status = STATUS.RUN;
+    }
+
+    public handlePauseButtonClick() {
+        this.status = STATUS.PAUSE;
+    }
+
+    public handleStopButtonClick() {
+        this.status = STATUS.INIT;
+        this.initEvolution();
     }
 
     private initEvolution() {
@@ -35,12 +54,13 @@ export class Evolution {
     }
 
     private initHtmlElements(): void {
-        this.initEventListeners();
-
         const targetCanvas = document.getElementById('target') as HTMLCanvasElement;
         this.targetCanvasContext = targetCanvas.getContext('2d');
+
         const sourceCanvas = document.getElementById('result') as HTMLCanvasElement;
         this.sourceCanvasContext = sourceCanvas.getContext('2d');
+
+        this.sourceCanvasContext.clearRect(0, 0, 256, 256);
     }
 
     private getTargetDataByCanvas(imageSrc: string , canvasContext: CanvasRenderingContext2D) {
@@ -57,30 +77,4 @@ export class Evolution {
         return scallop.clacMatchRate(this.targetImageData);
     }
 
-    private initEventListeners() {
-        const startButton = document.getElementById('start');
-        const pauseButton = document.getElementById('pause');
-        const stopButton = document.getElementById('stop');
-        startButton.addEventListener('click', this.handleStartButtonClick);
-        pauseButton.addEventListener('click', this.handlePauseButtonClick);
-        stopButton.addEventListener('click', this.handleStopButtonClick);
-    }
-
-    private handleStartButtonClick() {
-        this.status = STATUS.RUN;
-    }
-
-    private handlePauseButtonClick() {
-        this.status = STATUS.PAUSE;
-    }
-
-    private handleStopButtonClick() {
-        this.status = STATUS.STOP;
-    }
-}
-
-enum STATUS {
-    RUN,
-    STOP,
-    PAUSE
 }
