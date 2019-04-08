@@ -6,10 +6,16 @@ enum STATUS {
     PAUSE
 }
 
+interface Params {
+    trianglesCount: number;
+    colorAlpha: number;
+}
+
 export class Evolution {
     private status = STATUS.RUN;
     private targetImageData: ImageData;
-    private trianglesCount: number;
+    private trianglesCount = 80;
+    private colorAlpha = 0.35;
     private targetCanvasContext: CanvasRenderingContext2D;
     private sourceCanvasContext: CanvasRenderingContext2D;
     private parent: Scallop;
@@ -21,6 +27,9 @@ export class Evolution {
     }
 
     public handleStartButtonClick() {
+        if (this.status === STATUS.INIT) {
+            this.initEvolution();
+        }
         this.status = STATUS.RUN;
     }
 
@@ -30,11 +39,19 @@ export class Evolution {
 
     public handleStopButtonClick() {
         this.status = STATUS.INIT;
-        this.initEvolution();
+        this.sourceCanvasContext.clearRect(0, 0, 256, 256);
+    }
+
+    public handleTriangleCountChange(e: Event) {
+        if (this.status !== STATUS.INIT) {
+            e.preventDefault();
+            alert('You can not change triangles count when program is running');
+            return;
+        }
+        this.trianglesCount = parseInt((e.target as HTMLInputElement).value, 10);
     }
 
     private initEvolution() {
-        this.trianglesCount = 80;
         this.initHtmlElements();
 
         this.getTargetDataByCanvas('./imgs/chrome.png', this.targetCanvasContext);
@@ -44,6 +61,7 @@ export class Evolution {
     }
 
     private loop() {
+        console.log(this.trianglesCount, '!!!!');
         if (this.targetImageData && this.status === STATUS.RUN) {
             if (this.clacMatchRateWith(this.parent) > this.clacMatchRateWith(this.child)) {
                 this.parent = this.child;
@@ -59,6 +77,7 @@ export class Evolution {
 
         const sourceCanvas = document.getElementById('result') as HTMLCanvasElement;
         this.sourceCanvasContext = sourceCanvas.getContext('2d');
+        this.sourceCanvasContext.globalAlpha = this.colorAlpha;
 
         this.sourceCanvasContext.clearRect(0, 0, 256, 256);
     }

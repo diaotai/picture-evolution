@@ -31,7 +31,6 @@ export class Scallop {
 
     public draw() {
         this.canvasContext.clearRect(0, 0, 256, 256);
-        this.canvasContext.globalAlpha = 0.35;
         for (const triangle of this.triangles) {
             triangle.draw(this.canvasContext);
         }
