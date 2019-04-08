@@ -18,7 +18,7 @@ export class Evolution {
     private colorAlpha = 0.35;
     private targetCanvasContext: CanvasRenderingContext2D;
     private sourceCanvasContext: CanvasRenderingContext2D[] = [];
-    private sourceCanvasWidth = 64;
+    private sourceCanvasWidth = 256;
     private scallops: Scallop[] = [];
     private scallopCount = 100; 
     private outRate = 0.2;
@@ -70,10 +70,9 @@ export class Evolution {
         for (let scallop of scallops) {
             scallop.draw();
         }
+
         this.doNaturalSelection();
-        for (let scallop of scallops) {
-            scallop.canvasContext.clearRect(0, 0, this.sourceCanvasWidth, this.sourceCanvasWidth);
-        }
+
         setTimeout(this.loop.bind(this), 1000);
     }
     
@@ -85,6 +84,8 @@ export class Evolution {
         scallops = scallops.sort((x, y) => {
             return this.clacMatchRateWith(x) - this.clacMatchRateWith(y);
         })
+
+        console.log(this.clacMatchRateWith(scallops[0]),this.clacMatchRateWith(scallops[scallops.length - 1]))
 
         const startBoundary = Math.floor(count * this.outRate);
         const endBoundary = Math.floor(count * (1 - this.outRate));
@@ -111,7 +112,7 @@ export class Evolution {
     private initHtmlElements(): void {
         const targetCanvas = document.getElementById('target') as HTMLCanvasElement;
         this.targetCanvasContext = targetCanvas.getContext('2d');
-        this.targetCanvasContext.fillRect(0, 0, 64, 64);
+        this.targetCanvasContext.fillRect(0, 0, 256, 256);
         const resultDiv = document.getElementById('result');
         const sourceCanvas = resultDiv.getElementsByTagName('canvas');
         const sourceWidth = this.sourceCanvasWidth;
@@ -130,8 +131,7 @@ export class Evolution {
         image.src = imageSrc;
         return new Promise((resolve) => {
             image.onload = () => {
-                // canvasContext.drawImage(image, 0 , 0);
-                canvasContext.fillRect(0, 0, 256, 256);
+                canvasContext.drawImage(image, 0 , 0, 256, 256);
                 this.targetImageData = canvasContext.getImageData(0, 0, width, width);
                 resolve();
             };

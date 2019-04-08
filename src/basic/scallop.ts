@@ -22,7 +22,7 @@ export class Scallop {
     public clacMatchRate(targetImageData: ImageData): number {
         this.draw();
         let matchRate = 0;
-        const currentData = this.canvasContext.getImageData(0, 0, 64, 64);
+        const currentData = this.canvasContext.getImageData(0, 0, 256, 256);
         for (let i = 0; i < targetImageData.data.length; i++) {
             matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
         }
@@ -30,7 +30,7 @@ export class Scallop {
     }
 
     public draw() {
-        this.canvasContext.clearRect(0, 0, 64, 64);
+        this.canvasContext.clearRect(0, 0, 256, 256);
         for (const triangle of this.triangles) {
             triangle.draw(this.canvasContext);
         }
