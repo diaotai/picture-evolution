@@ -2,6 +2,7 @@ import { IButtonElements, IHTMLInputElements, IParams } from './interfaces/index
 import { Evolution } from './basic/evolution';
 
 function main() {
+    initResultCanvas();
     const evolution = new Evolution();
     initEventListeners(evolution);
     console.log(getAllHTMLInputValues());
@@ -14,6 +15,15 @@ function initEventListeners(evolution: Evolution) {
     buttonElements.pauseButton.addEventListener('click', evolution.handlePauseButtonClick.bind(evolution));
     buttonElements.stopButton.addEventListener('click', evolution.handleStopButtonClick.bind(evolution));
     // buttonElements.setParamsButton.addEventListener('click', evolution.handleSetParamsButtonClick.bind(evolution, ));
+}
+
+function initResultCanvas(nums = 100) {
+    const resultDiv = document.getElementById('result');
+    for (let i = 0; i < nums; i++) {
+        const canvas = document.createElement('canvas');
+        canvas.innerText = 'Something wrong happened!clear';
+        resultDiv.appendChild(canvas);
+    }
 }
 
 function getAllHTMLInputValues(): IParams  {

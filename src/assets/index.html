@@ -5,7 +5,19 @@
         input{
             margin: 10px;
         }
+
+        #result {
+            width: 50%;
+        }
+
+        canvas {
+            width: 64px;
+            height: 64px;
+            margin: 4px;
+            border:1px solid #d3d3d3;
+        }
     </style>
+
 </head>
 <body>
 <div style="margin: 15px">
@@ -16,12 +28,14 @@
 
 
 <div>
-    <canvas id="target" width="256" height="256" style="border:1px solid #d3d3d3;">
+    <canvas id="target">
         Shit happens! U need a better browser I think.
     </canvas>
-    <canvas id="result" width="256" height="256" style="border:1px solid #d3d3d3;">
-        Shit happens! U need a better browser I think.
-    </canvas>
+    <div id="result">
+        <!-- <canvas>
+            Shit happens! U need a better browser I think.
+        </canvas> -->
+    </div>
 </div>
 
 <div>
