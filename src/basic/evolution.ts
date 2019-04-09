@@ -16,9 +16,9 @@ export class Evolution {
     private targetImageData: ImageData;
     private trianglesCount = 80;
     private colorAlpha = 0.35;
+    private targetCanvas: HTMLCanvasElement;
     private targetCanvasContext: CanvasRenderingContext2D;
     private sourceCanvasContext: CanvasRenderingContext2D[] = [];
-    private sourceCanvasWidth = 256;
     private scallops: Scallop[] = [];
     private scallopCount = 100; 
     private outRate = 0.2;
@@ -72,8 +72,7 @@ export class Evolution {
         }
 
         this.doNaturalSelection();
-
-        setTimeout(this.loop.bind(this), 1000);
+        setTimeout(this.loop.bind(this), 3000);
     }
     
     private doNaturalSelection() {
@@ -85,7 +84,7 @@ export class Evolution {
             return this.clacMatchRateWith(x) - this.clacMatchRateWith(y);
         })
 
-        console.log(this.clacMatchRateWith(scallops[0]),this.clacMatchRateWith(scallops[scallops.length - 1]))
+        console.log(scallops.length, this.clacMatchRateWith(scallops[0]),this.clacMatchRateWith(scallops[scallops.length - 1]))
 
         const startBoundary = Math.floor(count * this.outRate);
         const endBoundary = Math.floor(count * (1 - this.outRate));
@@ -111,28 +110,28 @@ export class Evolution {
 
     private initHtmlElements(): void {
         const targetCanvas = document.getElementById('target') as HTMLCanvasElement;
+        this.targetCanvas = targetCanvas;
         this.targetCanvasContext = targetCanvas.getContext('2d');
-        this.targetCanvasContext.fillRect(0, 0, 256, 256);
         const resultDiv = document.getElementById('result');
         const sourceCanvas = resultDiv.getElementsByTagName('canvas');
-        const sourceWidth = this.sourceCanvasWidth;
         for (let canva of sourceCanvas) {
             const context = canva.getContext('2d');
             context.globalAlpha = this.colorAlpha;
             this.sourceCanvasContext.push(context);
-            context.clearRect(0, 0, sourceWidth, sourceWidth);
+            context.clearRect(0, 0, this.targetCanvas.width, this.targetCanvas.height);
         }
     }
 
     private getTargetDataByCanvas(imageSrc: string , canvasContext: CanvasRenderingContext2D) {
         const image = new Image();
-        const width = this.sourceCanvasWidth;
-        canvasContext.clearRect(0, 0, width, width);
+        const width = this.targetCanvas.width;
+        const height = this.targetCanvas.height;
+        canvasContext.clearRect(0, 0, width, height);
         image.src = imageSrc;
         return new Promise((resolve) => {
             image.onload = () => {
-                canvasContext.drawImage(image, 0 , 0, 256, 256);
-                this.targetImageData = canvasContext.getImageData(0, 0, width, width);
+                canvasContext.drawImage(image, 0 , 0, width, height);
+                this.targetImageData = canvasContext.getImageData(0, 0, 256, 256);
                 resolve();
             };
         })
