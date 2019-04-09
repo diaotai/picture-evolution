@@ -9,8 +9,8 @@ export class Scallop {
     constructor(triangleCount: number, canvasContextx: CanvasRenderingContext2D, parent?: Scallop) {
         if (parent) {
             this.triangleCount = parent.triangleCount;
-            this.canvasContext = parent.canvasContext;
             this.triangles = parent.triangles;
+            this.canvasContext = canvasContextx;
             this.mutated();
         } else {
             this.triangleCount = triangleCount;
