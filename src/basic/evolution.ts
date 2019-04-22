@@ -1,18 +1,11 @@
 import { Scallop } from './scallop';
 
-enum STATUS {
-    INIT,
-    RUN,
-    PAUSE
-}
-
 interface Params {
     trianglesCount: number;
     colorAlpha: number;
 }
 
 export class Evolution {
-    private status = STATUS.RUN;
     private targetImageData: ImageData;
     private trianglesCount = 80;
     private colorAlpha = 0.35;
@@ -27,31 +20,6 @@ export class Evolution {
         this.initEvolution().then(() => {
             this.loop();
         });
-    }
-
-    public handleStartButtonClick() {
-        if (this.status === STATUS.INIT) {
-            this.initEvolution();
-        }
-        this.status = STATUS.RUN;
-    }
-
-    public handlePauseButtonClick() {
-        this.status = STATUS.PAUSE;
-    }
-
-    public handleStopButtonClick() {
-        this.status = STATUS.INIT;
-        // this.sourceCanvasContext.clearRect(0, 0, 256, 256);
-    }
-
-    public handleTriangleCountChange(e: Event) {
-        if (this.status !== STATUS.INIT) {
-            e.preventDefault();
-            alert('You can not change triangles count when program is running');
-            return;
-        }
-        this.trianglesCount = parseInt((e.target as HTMLInputElement).value, 10);
     }
 
     private async initEvolution() {
@@ -72,7 +40,7 @@ export class Evolution {
         }
 
         this.doNaturalSelection();
-        setTimeout(this.loop.bind(this), 100);
+        setTimeout(this.loop.bind(this), 10);
     }
     
     private doNaturalSelection() {

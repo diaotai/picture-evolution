@@ -6,10 +6,6 @@
             margin: 10px;
         }
 
-        #result {
-            /* width: 50%; */
-        }
-
         canvas {
             width: 256px;
             height: 256px;
@@ -20,12 +16,6 @@
 
 </head>
 <body>
-<div style="margin: 15px">
-    <button id="start">start!</button>
-    <button id="stop">stop!</button>
-    <button id="pause">pause!</button>
-</div>
-
 
 <div>
     <canvas id="target"  width="256" height="256">
@@ -33,22 +23,6 @@
     </canvas>
     <div id="result">
     </div>
-</div>
-
-<div>
-    <p>canvas区域大小256*256, 三角形点坐标和颜色的范围在0-255, 第一档的范围请勿设置过大. 透明度alpha设置范围0-1, 越小越透明.</p>
-    <p>建议越到后面第二档和第三档的概率和变动越小. 同时无论多小, 每一代后代至少会有一次变异,做了点dirtywork.</p>
-    三角形数量:<input id="triangleCount"  style="width:60px;" value="80" /><br/>
-    三角形的点有<input id="pointMaxMutateRate"  style="width:60px;" value="0.0008" />的概率发生&nbsp&nbsp<input id="pointMaxMutateRangeStart"  style="width:60px;" value="0" />-<input id="pointMaxMutateRangeEnd"  style="width:60px;" value="255" />的变异<br/>
-    三角形的点有<input id="pointMidMutateRate"  style="width:60px;" value="0.003" />的概率发生±<input id="pointMidMutateRange"  style="width:60px;" value="10" />的变异<br/>
-    三角形的点有<input id="pointMinMutateRate"  style="width:60px;" value="0.009" />的概率发生±<input id="pointMinMutateRange"  style="width:60px;" value="5" />的变异<br/>
-
-    颜色有<input id="colorMaxMutateRate"  style="width:60px;" value="0.0008" />的概率发生&nbsp&nbsp<input id="colorMaxMutateRangeStart"  style="width:60px;" value="0" />-<input id="colorMaxMutateRangeEnd"  style="width:60px;" value="255" />的变异<br/>
-    颜色有<input id="colorMidMutateRate"  style="width:60px;" value="0.003" />的概率发生±<input id="colorMidMutateRange"  style="width:60px;" value="10" />的变异<br/>
-    颜色有<input id="colorMinMutateRate"  style="width:60px;" value="0.009" />的概率发生±<input id="colorMinMutateRange"  style="width:60px;" value="5" />的变异<br/>
-
-    三角形透明度:<input id="colorAlpha"  style="width:60px;" value="0.35" /><br/>
-    <button id="setParams">setIt!</button>
 </div>
 
 </body>
