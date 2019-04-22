@@ -21,7 +21,7 @@ export class Evolution {
     private sourceCanvasContext: CanvasRenderingContext2D[] = [];
     private scallops: Scallop[] = [];
     private scallopCount = 100; 
-    private outRate = 0.2;
+    private outRate = 0.3;
 
     constructor() {
         this.initEvolution().then(() => {
@@ -59,7 +59,7 @@ export class Evolution {
 
         await this.getTargetDataByCanvas('./imgs/chrome.png', this.targetCanvasContext);
         for (let i = 0; i < this.sourceCanvasContext.length; i++) {
-            const scallop = new Scallop(this.trianglesCount, this.sourceCanvasContext[i]);
+            const scallop = new Scallop(this.trianglesCount, this.sourceCanvasContext[i], this.targetImageData);
             this.scallops.push(scallop);
         }
     }
@@ -72,7 +72,7 @@ export class Evolution {
         }
 
         this.doNaturalSelection();
-        setTimeout(this.loop.bind(this), 3000);
+        setTimeout(this.loop.bind(this), 100);
     }
     
     private doNaturalSelection() {
@@ -104,10 +104,10 @@ export class Evolution {
         for (let i = endBoundary; i < scallops.length; i++) {
             const index = Math.floor(Math.random() * endBoundary);
             const originScallop = scallops[i];
-            scallops[i] = new Scallop(originScallop.triangleCount, originScallop.canvasContext ,scallops[index])
+            scallops[i] = new Scallop(originScallop.triangleCount, originScallop.canvasContext, this.targetImageData, scallops[index])
         }
     }
-
+x
     private initHtmlElements(): void {
         const targetCanvas = document.getElementById('target') as HTMLCanvasElement;
         this.targetCanvas = targetCanvas;
@@ -139,7 +139,7 @@ export class Evolution {
     }
 
     private clacMatchRateWith(scallop: Scallop): number {
-        return scallop.clacMatchRate(this.targetImageData);
+        return scallop.matchRate;
     }
 
     private getRandomKeyFromSet(set: Set<number>): number {

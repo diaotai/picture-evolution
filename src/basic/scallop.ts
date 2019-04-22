@@ -5,28 +5,33 @@ export class Scallop {
     public canvasContext: CanvasRenderingContext2D;
     public triangles: Triangle[] = [];
     public parent: Scallop;
+    public matchRate: number;
 
-    constructor(triangleCount: number, canvasContextx: CanvasRenderingContext2D, parent?: Scallop) {
+    private targetImageData: ImageData;
+
+    constructor(triangleCount: number, canvasContextx: CanvasRenderingContext2D, targetImageData: ImageData, parent?: Scallop) {
         if (parent) {
             this.triangleCount = parent.triangleCount;
             this.triangles = parent.triangles;
             this.canvasContext = canvasContextx;
+            this.targetImageData =targetImageData;
             this.mutated();
         } else {
             this.triangleCount = triangleCount;
             this.canvasContext = canvasContextx;
+            this.targetImageData = targetImageData;
             this.initTrianglesAsParent();
         }
     }
 
-    public clacMatchRate(targetImageData: ImageData): number {
-        this.draw();
+    public clacMatchRate() {
         let matchRate = 0;
+        const targetImageData = this.targetImageData;
         const currentData = this.canvasContext.getImageData(0, 0, 256, 256);
         for (let i = 0; i < targetImageData.data.length; i++) {
             matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
         }
-        return matchRate;
+        this.matchRate = matchRate;
     }
 
     public draw() {
@@ -34,6 +39,7 @@ export class Scallop {
         for (const triangle of this.triangles) {
             triangle.draw(this.canvasContext);
         }
+        this.clacMatchRate();
     }
 
     public mate(scallop: Scallop) {
