@@ -19,6 +19,10 @@ export class Triangle {
         }
     }
 
+    public clone(): Triangle {
+        return new Triangle(this.points, this.color);
+    }
+
     public mutate() {
         for (const point of this.points) {
             point.mutate();

@@ -12,7 +12,9 @@ export class Scallop {
     constructor(triangleCount: number, canvasContextx: CanvasRenderingContext2D, targetImageData: ImageData, parent?: Scallop) {
         if (parent) {
             this.triangleCount = parent.triangleCount;
-            this.triangles = parent.triangles;
+            for (let i = 0; i < parent.triangles.length; i++) {
+                this.triangles[i] = parent.triangles[i].clone();
+            }
             this.canvasContext = canvasContextx;
             this.targetImageData =targetImageData;
             this.mutated();
@@ -46,11 +48,11 @@ export class Scallop {
         const triangles: Triangle[] = [];
         for (let i = 0; i < this.triangleCount; i++) {
             const triangle = Math.random() > 0.5 ? this.triangles[i] : scallop.triangles[i];
-            triangles.push(triangle);
+            triangles.push(triangle.clone());
         }
         this.triangles = triangles;
+        scallop.triangles = triangles.map((triangle) => triangle.clone());
         this.mutated();
-        scallop.triangles = triangles;
         scallop.mutated();
     }
 
@@ -65,7 +67,7 @@ export class Scallop {
     private mutated() {
         for (let i = 0; i < this.triangleCount; i ++) {
             const parentTriangle = this.triangles[i];
-            const childTriangle = new Triangle(parentTriangle.points, parentTriangle.color);
+            const childTriangle = parentTriangle.clone();
             childTriangle.mutate();
             this.triangles[i] = childTriangle;
         }

@@ -7,14 +7,14 @@ interface Params {
 
 export class Evolution {
     private targetImageData: ImageData;
-    private trianglesCount = 80;
+    private trianglesCount = 200;
     private colorAlpha = 0.35;
     private targetCanvas: HTMLCanvasElement;
     private targetCanvasContext: CanvasRenderingContext2D;
     private sourceCanvasContext: CanvasRenderingContext2D[] = [];
     private scallops: Scallop[] = [];
     private scallopCount = 100; 
-    private outRate = 0.3;
+    private outRate = 0.2;
 
     constructor() {
         this.initEvolution().then(() => {
@@ -25,7 +25,7 @@ export class Evolution {
     private async initEvolution() {
         this.initHtmlElements();
 
-        await this.getTargetDataByCanvas('./imgs/chrome.png', this.targetCanvasContext);
+        await this.getTargetDataByCanvas('./imgs/ml.jpg', this.targetCanvasContext);
         for (let i = 0; i < this.sourceCanvasContext.length; i++) {
             const scallop = new Scallop(this.trianglesCount, this.sourceCanvasContext[i], this.targetImageData);
             this.scallops.push(scallop);
@@ -33,14 +33,13 @@ export class Evolution {
     }
 
     private loop() {
-        console.log('loop!!!!');
         const scallops = this.scallops;
         for (let scallop of scallops) {
             scallop.draw();
         }
 
         this.doNaturalSelection();
-        setTimeout(this.loop.bind(this), 10);
+        setTimeout(this.loop.bind(this), 0);
     }
     
     private doNaturalSelection() {
