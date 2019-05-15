@@ -15,10 +15,15 @@ export class Evolution {
     private scallops: Scallop[] = [];
     private scallopCount = 100; 
     private outRate = 0.2;
+    private startDate: number;        // 进化开始的时间
+    private loopCount = 0;          // 进化进行的代数
+    private lastBestMatchRate = Number.MIN_SAFE_INTEGER;   // 之前最好的rate
+    private lastBestLoopCount = 0;          // 之前最好的那一次的代数
 
     constructor() {
         this.initEvolution().then(() => {
             this.loop();
+            this.startDate = Date.now();
         });
     }
 
@@ -39,6 +44,14 @@ export class Evolution {
         }
 
         this.doNaturalSelection();
+        if (scallops[0].matchRate > this.lastBestMatchRate) {
+            this.lastBestMatchRate = scallops[0].matchRate;
+            this.lastBestLoopCount = this.loopCount;
+        } else if (this.loopCount - this.lastBestLoopCount > 100){
+            console.log('done', (Date.now() - this.startDate) / 1000);
+            return;
+        }
+        this.loopCount++;
         setTimeout(this.loop.bind(this), 0);
     }
     
@@ -51,7 +64,7 @@ export class Evolution {
             return this.clacMatchRateWith(y) - this.clacMatchRateWith(x);
         })
 
-        console.log(scallops.length, this.clacMatchRateWith(scallops[0]),this.clacMatchRateWith(scallops[scallops.length - 1]))
+        console.log(this.loopCount, '!!!!!!!', this.clacMatchRateWith(scallops[0]), '!!!!!', this.lastBestMatchRate, this.lastBestLoopCount);
 
         const startBoundary = Math.floor(count * this.outRate);
         const endBoundary = Math.floor(count * (1 - this.outRate));
