@@ -7,7 +7,7 @@ interface Params {
 
 export class Evolution {
     private targetImageData: ImageData;
-    private trianglesCount = 200;
+    private trianglesCount = 80;
     private colorAlpha = 0.35;
     private targetCanvas: HTMLCanvasElement;
     private targetCanvasContext: CanvasRenderingContext2D;
@@ -25,7 +25,7 @@ export class Evolution {
     private async initEvolution() {
         this.initHtmlElements();
 
-        await this.getTargetDataByCanvas('./imgs/ml.jpg', this.targetCanvasContext);
+        await this.getTargetDataByCanvas('./imgs/chrome.png', this.targetCanvasContext);
         for (let i = 0; i < this.sourceCanvasContext.length; i++) {
             const scallop = new Scallop(this.trianglesCount, this.sourceCanvasContext[i], this.targetImageData);
             this.scallops.push(scallop);
@@ -48,7 +48,7 @@ export class Evolution {
 
         // 计算与目标图片的相似度
         scallops = scallops.sort((x, y) => {
-            return this.clacMatchRateWith(x) - this.clacMatchRateWith(y);
+            return this.clacMatchRateWith(y) - this.clacMatchRateWith(x);
         })
 
         console.log(scallops.length, this.clacMatchRateWith(scallops[0]),this.clacMatchRateWith(scallops[scallops.length - 1]))

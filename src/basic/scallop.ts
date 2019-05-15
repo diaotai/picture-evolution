@@ -33,7 +33,7 @@ export class Scallop {
         for (let i = 0; i < targetImageData.data.length; i++) {
             matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
         }
-        this.matchRate = matchRate;
+        this.matchRate = -matchRate;
     }
 
     public draw() {
