@@ -1,4 +1,5 @@
 import { Triangle } from './triangle';
+import { compare } from '../utils/imageSSE';
 
 export class Scallop {
     public triangleCount: number;
@@ -27,13 +28,14 @@ export class Scallop {
     }
 
     public clacMatchRate() {
-        let matchRate = 0;
+        // let matchRate = 0;
         const targetImageData = this.targetImageData;
         const currentData = this.canvasContext.getImageData(0, 0, 256, 256);
-        for (let i = 0; i < targetImageData.data.length; i++) {
-            matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
-        }
-        this.matchRate = -matchRate;
+        // for (let i = 0; i < targetImageData.data.length; i++) {
+        //     matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
+        // }
+        // this.matchRate = -matchRate;
+        this.matchRate = compare(targetImageData, currentData).psnr;
     }
 
     public draw() {
