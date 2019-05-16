@@ -1,5 +1,7 @@
 import { Triangle } from './triangle';
-import { compare } from '../utils/imageSSE';
+// import { compare } from '../utils/imageSSE';
+// import { compare } from '../utils/colorDistribution';
+import { msCompare } from '../utils/ssim';
 
 export class Scallop {
     public triangleCount: number;
@@ -35,7 +37,7 @@ export class Scallop {
         //     matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
         // }
         // this.matchRate = -matchRate;
-        this.matchRate = compare(targetImageData, currentData).psnr;
+        this.matchRate = msCompare(targetImageData, currentData);
     }
 
     public draw() {

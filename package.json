@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "image-ms-ssim": "^0.2.0",
     "ts-lint": "^4.5.1",
     "webpack": "^4.28.2"
   },

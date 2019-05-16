@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+		"baseUrl": ".",
+		"paths": { "*": ["types/*"] },
       "sourceMap": true,
       "target": "es2015"
     }
