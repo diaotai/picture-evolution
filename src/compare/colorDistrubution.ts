@@ -58,6 +58,6 @@ function vectorCosine(p1, p2): number {
     return res;
 }
 
-export function compare(image1: ImageData, image2: ImageData): number {
+export function colorDistributionCompare(image1: ImageData, image2: ImageData): number {
     return vectorCosine(filterImageData(image1.data), filterImageData(image2.data));
 };

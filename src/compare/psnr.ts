@@ -1,4 +1,4 @@
-export function compare(image1: ImageData, image2: ImageData) {
+export function psnrCompare(image1: ImageData, image2: ImageData): number {
     var sum = 0;
     var l = image1.data.length;
     var i;
@@ -25,10 +25,7 @@ export function compare(image1: ImageData, image2: ImageData) {
     }
     var pc = l;
     var mse = sum / pc;
-    return {
-        mse: mse,
-        psnr: psnr(mse)
-    };
+    return psnr(mse);
 }
 function psnr(mse, max = 255): number {
     return 10 * log10((max * max) / mse);

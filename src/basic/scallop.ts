@@ -1,11 +1,29 @@
 import { Triangle } from './triangle';
-// import { compare } from '../utils/imageSSE';
-// import { compare } from '../utils/colorDistribution';
-import { msCompare } from '../utils/ssim';
-// import { compare } from '../utils/avgPow';
-import { compare } from '../utils/weightAverage'
-
+import { colorDistributionCompare, pixelAverageCompare, psnrCompare, rgbAbsCompare, rgbPowCompare,
+    ssimCompare, msSsimCompare ,weightCountCompare } from '../compare/index';
+enum STATUS {
+    COLOR,
+    PIXEL,
+    PSNR,
+    ABS,
+    POW,
+    SSIM,
+    MSSSIM,
+    WEIGHT
+}
 export class Scallop {
+    static compareMap = {
+        [STATUS.COLOR]: colorDistributionCompare,
+        [STATUS.PIXEL]: pixelAverageCompare,
+        [STATUS.PSNR]: psnrCompare,
+        [STATUS.ABS]: rgbAbsCompare,
+        [STATUS.POW]: rgbPowCompare,
+        [STATUS.SSIM]: ssimCompare,
+        [STATUS.MSSSIM]: msSsimCompare,
+        [STATUS.WEIGHT]: weightCountCompare
+    }
+
+    public status: STATUS = STATUS.POW;
     public triangleCount: number;
     public canvasContext: CanvasRenderingContext2D;
     public triangles: Triangle[] = [];
@@ -32,14 +50,9 @@ export class Scallop {
     }
 
     public clacMatchRate() {
-        // let matchRate = 0;
+        const compare = Scallop.compareMap[this.status];
         const targetImageData = this.targetImageData;
         const currentData = this.canvasContext.getImageData(0, 0, 256, 256);
-        // for (let i = 0; i < targetImageData.data.length; i++) {
-        //     // matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
-        //     matchRate += Math.abs(targetImageData.data[i] - currentData.data[i]);
-        // }
-        // this.matchRate = -matchRate;
         this.matchRate = compare(targetImageData, currentData);
     }
 

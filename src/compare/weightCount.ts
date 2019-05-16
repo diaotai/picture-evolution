@@ -1,4 +1,4 @@
-export function compare(image1: ImageData, image2: ImageData) {
+export function weightCountCompare(image1: ImageData, image2: ImageData): number {
     let matchRate = 0;
     for (let i = 0; i < image1.data.length; i++) {
         if (i + 1 % 4 === 0) {

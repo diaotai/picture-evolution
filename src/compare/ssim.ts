@@ -1,7 +1,11 @@
 import { compare } from 'image-ms-ssim';
 
-export function msCompare(image1: ImageData, image2: ImageData) {
+export function ssimCompare(image1: ImageData, image2: ImageData) {
 	return compare(transfer(image1), transfer(image2)).ssim;
+}
+
+export function msSsimCompare(image1: ImageData, image2: ImageData) {
+	return compare(transfer(image1), transfer(image2)).msssim;
 }
 
 function transfer(image: ImageData) {
