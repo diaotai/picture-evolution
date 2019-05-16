@@ -2,6 +2,7 @@ import { Triangle } from './triangle';
 // import { compare } from '../utils/imageSSE';
 // import { compare } from '../utils/colorDistribution';
 import { msCompare } from '../utils/ssim';
+import { compare } from '../utils/avgPow';
 
 export class Scallop {
     public triangleCount: number;
@@ -34,10 +35,11 @@ export class Scallop {
         const targetImageData = this.targetImageData;
         const currentData = this.canvasContext.getImageData(0, 0, 256, 256);
         // for (let i = 0; i < targetImageData.data.length; i++) {
-        //     matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
+        //     // matchRate += Math.pow(targetImageData.data[i] - currentData.data[i] , 2);
+        //     matchRate += Math.abs(targetImageData.data[i] - currentData.data[i]);
         // }
         // this.matchRate = -matchRate;
-        this.matchRate = msCompare(targetImageData, currentData);
+        this.matchRate = compare(targetImageData, currentData);
     }
 
     public draw() {
