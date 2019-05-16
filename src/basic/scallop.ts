@@ -2,7 +2,8 @@ import { Triangle } from './triangle';
 // import { compare } from '../utils/imageSSE';
 // import { compare } from '../utils/colorDistribution';
 import { msCompare } from '../utils/ssim';
-import { compare } from '../utils/avgPow';
+// import { compare } from '../utils/avgPow';
+import { compare } from '../utils/weightAverage'
 
 export class Scallop {
     public triangleCount: number;
